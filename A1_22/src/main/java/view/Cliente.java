@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.ControllerCliente;
+import model.ClienteClass;
 
 import javax.swing.BoxLayout;
 import javax.swing.JTable;
@@ -102,7 +103,8 @@ public class Cliente extends JFrame {
 		getContentPane().add(Fecha);
 		
 		txtFecha = new JTextField();
-		txtFecha.setText("");
+		txtFecha.setToolTipText("");
+		txtFecha.setText("2023-04-11");
 		txtFecha.setBounds(182, 266, 160, 25);
 		getContentPane().add(txtFecha);
 	}
@@ -120,10 +122,13 @@ public class Cliente extends JFrame {
 		
 		if (e.getSource() == btnAñadir) {
 			try {				
-				Cliente cliente=new Cliente();
+				ClienteClass cliente=new ClienteClass();
 				cliente.setNombre(txtNombre.getText());
-				cliente.setNomApels(txtApellido.getText());
-				cliente.registrarCientificos(cliente);	
+				cliente.setDni(txtNombre.getText());
+				cliente.setDireccion(txtNombre.getText());
+				cliente.setFecha(txtNombre.getText());
+				cliente.setApellido(txtApellido.getText());	
+				//cliente.registrarCientificos(cliente);	
 			} 
 			catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,"Error al ingresar datos", "Error",JOptionPane.ERROR_MESSAGE);
