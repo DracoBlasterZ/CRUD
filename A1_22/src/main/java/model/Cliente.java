@@ -7,7 +7,7 @@ public class Cliente {
 		DbConection dbc = new DbConection();
 
 		// Conéctate a la base de datos
-		dbc.connect("192.168.4.105:3306", "remote", "P@ssw0rd_Remote");
+		dbc.connect("localhost", "root", "Camila1234_");
 
 		// Elimina y crea la base de datos ud18_ejercicio2
 		dbc.createDB("clientes");
