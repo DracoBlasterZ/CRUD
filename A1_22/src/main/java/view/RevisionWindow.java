@@ -11,6 +11,9 @@ import javax.swing.JTextField;
 
 import controller.ControllerCliente;
 import model.Cliente;
+import model.ClienteClass;
+
+import javax.swing.JList;
 
 public class RevisionWindow extends JFrame implements ActionListener {
 
@@ -99,9 +102,9 @@ public class RevisionWindow extends JFrame implements ActionListener {
 			
 			try {
 				
-				Cliente miCliente=new Cliente();
+				ClienteClass miCliente=new ClienteClass();
 				miCliente.setDni(txtDni.getText());
-				miCliente.setNomApels(txtNombre.getText());
+				miCliente.setNombre(txtNombre.getText());
 				ControllerCliente.modificarCliente(miCliente);
 				
 				if (ClienteServ.modificaCliente==true) {
