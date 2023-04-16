@@ -15,7 +15,7 @@ public class ClienteConsultas extends DbConection {
 		// CONSULTAS
 
 		private Connection con;
-		private String table = "Cliente";
+		private String table = "cliente";
 
 		public boolean registro(Cliente cliente) {
 			con = getConexion();
@@ -58,6 +58,7 @@ public class ClienteConsultas extends DbConection {
 
 		}
 
+		//Primero se busca, y despues se pueden modificar datos. 
 		public boolean modificar(Cliente cliente) {
 			con = getConexion();
 			PreparedStatement ps = null;
@@ -105,6 +106,8 @@ public class ClienteConsultas extends DbConection {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			String sql = "SELECT * FROM " + table + " WHERE nombre=?";
+			
+			//Para buscar hay que buscar por nombre. 
 
 			try {
 				ps = con.prepareStatement(sql);
