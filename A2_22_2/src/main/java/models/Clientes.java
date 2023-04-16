@@ -1,6 +1,4 @@
-package model;
-
-
+package models;
 
 import java.util.Date;
 
@@ -9,34 +7,33 @@ import javax.swing.JOptionPane;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Cliente {
+public class Clientes {
 
-	// Client model with attributes
 	private int id;
 	private String nombre;
 	private String apellido;
 	private String direccion;
 	private int DNI;
-	private String date;
+	private String fecha;
 
 	// Default constructor
-	public Cliente() {
+	public Clientes() {
 	}
 
 	// Constructor with attributes
-	public Cliente(int id, String nombre, String apellido, String direccion, int DNI, String date) {
+	public Clientes(int id, String nombre, String apellido, String direccion, int DNI, String date) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
 		this.DNI = DNI;
-		this.date = date;
+		this.fecha = date;
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion
-				+ ", DNI=" + DNI + ", date=" + date + "";
+		return "Clientes id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion
+				+ ", DNI=" + DNI + ", date=" + fecha + "";
 	}
 
 	// Getters
@@ -61,7 +58,7 @@ public class Cliente {
 	}
 
 	public String getDate() {
-		return date;
+		return fecha;
 	}
 
 	// Setters
@@ -86,12 +83,11 @@ public class Cliente {
 	}
 
 	public void setDate(String date) {
-		this.date = dateValidator(date);
+		this.fecha = dateValidator(date);
 	}
 
 	// Methods
 	// Validators
-	// Validate x character varchars
 	public String strLenValidator(String string, int l) {
 		if (string.length() > l) {
 			JOptionPane.showMessageDialog(null, string + ". This field is longer than " + l + " characters.");
