@@ -13,24 +13,23 @@ import javax.swing.table.AbstractTableModel;
 
 import DBConnector.DBConnectorClass;
 
-public class ClientesConnector extends AbstractTableModel {
+public class VideosConnector extends AbstractTableModel {
 
 	// Table attributes
-	private List<Clientes> clientes;
-	private String[] columnNames = { "ID", "Nombre", "Apellido", "Direccion", "DNI", "Fecha" };
+	private List<Videos> videos;
+	private String[] columnNames = { "id", "title", "director", "cli_id" };
 	private String DB = "Youtube";
 	private Connection connection;
-	private String table = "cliente";
+	private String table = "videos";
 	
-	
-	public ClientesConnector() {
+	public VideosConnector() {
 		updateTable();
 	}
 
 
 	@Override
 	public int getRowCount() {
-		return clientes.size();
+		return videos.size();
 	}
 
 
@@ -49,16 +48,16 @@ public class ClientesConnector extends AbstractTableModel {
 		return row > 0;
 	}
 
-	public List<Clientes> getClientes() {
-		return clientes;
+	public List<Videos> getVideos() {
+		return videos;
 	}
 
 	public String[] getColumnNames() {
 		return columnNames;
 	}
 
-	public void setClientes(List<Clientes> clientes) {
-		this.clientes = clientes;
+	public void setVideos(List<Videos> videos) {
+		this.videos = videos;
 	}
 
 	public void setColumnNames(String[] columnNames) {
@@ -68,27 +67,23 @@ public class ClientesConnector extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Clientes cliente = clientes.get(rowIndex);
+		Videos video = videos.get(rowIndex);
 
 		switch (columnIndex) {
 		case 0:
-			return cliente.getId();
+			return video.getId();
 		case 1:
-			return cliente.getNombre();
+			return video.getTitle();
 		case 2:
-			return cliente.getApellido();
+			return video.getDirector();
 		case 3:
-			return cliente.getDireccion();
-		case 4:
-			return cliente.getDNI();
-		case 5:
-			return cliente.getDate();
+			return video.getCli_id();
 		default:
 			return null;
 		}
 	}
 	public void updateTable() {
-		this.clientes = new ArrayList<Clientes>();
+		this.videos = new ArrayList<Videos>();
 		connection = DBConnectorClass.connect("192.168.1.128:3306","remote","por.java12DABA");
 		DBConnectorClass.selectDB("Youtube");
 		try {
@@ -97,13 +92,11 @@ public class ClientesConnector extends AbstractTableModel {
 			ResultSet rs = statement.executeQuery("SELECT * FROM " + table + ";");
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
-				String apellido = rs.getString("apellido");
-				String direccion = rs.getString("direccion");
-				int dni = rs.getInt("dni");
-				String fecha = rs.getString("fecha");
-				Clientes cliente = new Clientes(id, nombre, apellido, direccion, dni, fecha);
-				clientes.add(cliente);
+				String title = rs.getString("title");
+				String director = rs.getString("director");
+				int cli_id = rs.getInt("cli_id");
+				Videos video = new Videos(id, title, director, cli_id);
+				videos.add(video);
 			}
 			statement.close();
 			rs.close();
@@ -112,18 +105,16 @@ public class ClientesConnector extends AbstractTableModel {
 			e.printStackTrace();
 		}
 	}
-	public void addClienteToDB(Clientes cliente) {
+	public void addVideoToDB(Videos video) {
 		connection = DBConnectorClass.connect("192.168.1.128:3306","remote","por.java12DABA");
 		DBConnectorClass.selectDB("Youtube");
-		String query = "INSERT INTO " + table + " (nombre, apellido, direccion, dni, fecha) " + "VALUES (?,?,?,?,?);";
+		String query = "INSERT INTO " + table + " (title, director, cli_id) " + "VALUES (?,?,?);";
 
 		try {
 			PreparedStatement pStatement = connection.prepareStatement(query);
-			pStatement.setString(1, cliente.getNombre());
-			pStatement.setString(2, cliente.getApellido());
-			pStatement.setString(3, cliente.getDireccion());
-			pStatement.setInt(4, cliente.getDNI());
-			pStatement.setString(5, cliente.getDate());
+			pStatement.setString(1, video.getTitle());
+			pStatement.setString(2, video.getDirector());
+			pStatement.setLong(3, video.getCli_id());
 
 			// Execute statement and close if success
 			pStatement.executeUpdate();
@@ -136,12 +127,11 @@ public class ClientesConnector extends AbstractTableModel {
 		}
 	}
 	public void deleteCliente(int index) {
-		// Get clientes from index
-		Clientes cliente = clientes.get(index);
-		int clienteID = cliente.getId();
+		Videos video = videos.get(index);
+		int videoID = video.getId();
 		connection = DBConnectorClass.connect("192.168.1.128:3306","remote","por.java12DABA");
 		DBConnectorClass.selectDB("Youtube");
-		String query = "DELETE FROM " + table + " WHERE id = " + clienteID + ";";
+		String query = "DELETE FROM " + table + " WHERE id = " + videoID + ";";
 
 		try {
 			Statement statement = connection.createStatement();
@@ -157,6 +147,7 @@ public class ClientesConnector extends AbstractTableModel {
 		}
 
 		// Remove from table
-		clientes.remove(index);
+		videos.remove(index);
 	}
 }
+	

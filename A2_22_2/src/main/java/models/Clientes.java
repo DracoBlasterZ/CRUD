@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 
 public class Clientes {
 
-	// Client model with attributes
 	private int id;
 	private String nombre;
 	private String apellido;
