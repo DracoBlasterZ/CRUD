@@ -2,36 +2,60 @@ package model;
 
 public class Cliente {
 
-	public static void main(String[] args) {
+		private int id;
+		private String nombre;
+		private String apellido;
+		private String direccion;
+		private int dni;
+		private String fecha;
 
-		DbConection dbc = new DbConection();
+		// GETTERS Y SETTERS
+		public int getId() {
+			return id;
+		}
 
-		// Conéctate a la base de datos
-		dbc.connect("localhost", "root", "Camila1234_");
+		public void setId(int id) {
+			this.id = id;
+		}
 
-		// Elimina y crea la base de datos ud18_ejercicio2
-		dbc.createDB("clientes");
+		public String getNombre() {
+			return nombre;
+		}
 
-		// Selecciona la base de datos
-		dbc.selectDB("clientes");
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
 
-		// Crear tabla cliente
-		String tableColumns1 = "id INT AUTO_INCREMENT, nombre VARCHAR(100),"
-				+ " apellido VARCHAR(100),direccion VARCHAR(300),dni char(8), fecha date, PRIMARY KEY (id)";
-		dbc.createTable("clientes", "cliente", tableColumns1);
+		public String getApellido() {
+			return apellido;
+		}
 
-		// Insertar registros en la tabla cliente
-		String columns1 = "nombre, apellido, direccion, dni, fecha";
-		String values1_1 = "'Juan', 'Pérez', 'Calle Falsa 123', '12345678', '2023-04-11'";
-		dbc.insertData("clientes", "cliente", columns1, values1_1);
+		public void setApellido(String apellido) {
+			this.apellido = apellido;
+		}
 
+		public String getDireccion() {
+			return direccion;
+		}
 
-		// Enseñar datos
-		dbc.getValues("clientes", "cliente", columns1);
+		public void setDireccion(String direccion) {
+			this.direccion = direccion;
+		}
 
-		// Cerrar conexión
-		dbc.closeConnection();
+		public int getDni() {
+			return dni;
+		}
 
-	}
+		public void setDni(int dni) {
+			this.dni = dni;
+		}
+
+		public String getFecha() {
+			return fecha;
+		}
+
+		public void setFecha(String fecha) {
+			this.fecha = fecha;
+		}
 
 }
