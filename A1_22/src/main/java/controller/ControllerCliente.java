@@ -13,98 +13,99 @@ public class ControllerCliente implements ActionListener {
 
 	private Cliente cliente;
 	private ClienteConsultas consultas;
-	private ClienteView view;
+	private ClienteView vista;
 
-	public ControllerCliente(Cliente cliente, ClienteConsultas consultas, ClienteView view) {
+	public ControllerCliente(Cliente cliente, ClienteConsultas consultas, ClienteView vista) {
 		this.cliente = cliente;
 		this.consultas = consultas;
-		this.view = view;
-		this.view.btnAdd.addActionListener(this);
-		this.view.btnBuscar.addActionListener(this);
-		this.view.btnClean.addActionListener(this);
-		this.view.btnDelete.addActionListener(this);
-		this.view.btnUpdate.addActionListener(this);
+		this.vista = vista;
+		this.vista.botonAñadir.addActionListener(this);
+		this.vista.btnBuscar.addActionListener(this);
+		this.vista.botonVaciar.addActionListener(this);
+		this.vista.botonEliminar.addActionListener(this);
+		this.vista.botonModificar.addActionListener(this);
 	}
 
 	public void iniciar() {
-		view.setTitle("Gestión Clientes");
-		view.textId.setVisible(false);
+		vista.setTitle("Gestión Clientes");
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == view.btnAdd) {
-			cliente.setNombre(view.textNombre.getText());
-			cliente.setApellido(view.textApellido.getText());
-			cliente.setDireccion(view.textAdress.getText());
-			cliente.setDni(Integer.parseInt(view.textDni.getText()));
-			cliente.setFecha(view.textDate.getText());
-			if (consultas.registro(cliente)) {
+		if (e.getSource() == vista.botonAñadir) {
+			cliente.setNombre(vista.textNombre.getText());
+			cliente.setApellido(vista.textApellido.getText());
+			cliente.setDireccion(vista.textAdress.getText());
+			cliente.setDni(Integer.parseInt(vista.textDni.getText()));
+			cliente.setFecha(vista.textDate.getText());
+			if (consultas.añadir(cliente)) {
 				JOptionPane.showMessageDialog(null, "Registro Añadido");
-				limpiar();
+				vaciarCampos();
 			} else {
 				JOptionPane.showMessageDialog(null, "Error al Guardar");
-				limpiar();
+				vaciarCampos();
 			}
 
 		}
-		if (e.getSource() == view.btnUpdate) {
+		if (e.getSource() == vista.botonModificar) {
 
-			cliente.setId(Integer.parseInt(view.textId.getText()));
-			cliente.setNombre(view.textNombre.getText());
-			cliente.setApellido(view.textApellido.getText());
-			cliente.setDireccion(view.textAdress.getText());
-			cliente.setDni(Integer.parseInt(view.textDni.getText()));
-			cliente.setFecha(view.textDate.getText());
+			cliente.setId(Integer.parseInt(vista.textId.getText()));
+			cliente.setNombre(vista.textNombre.getText());
+			cliente.setApellido(vista.textApellido.getText());
+			cliente.setDireccion(vista.textAdress.getText());
+			cliente.setDni(Integer.parseInt(vista.textDni.getText()));
+			cliente.setFecha(vista.textDate.getText());
 
 			if (consultas.modificar(cliente)) {
 				JOptionPane.showMessageDialog(null, "Registro Modificado");
-				limpiar();
+				vaciarCampos();
 			} else {
 				JOptionPane.showMessageDialog(null, "Error al Modificar");
-				limpiar();
+				vaciarCampos();
 			}
 
 		}
-		if (e.getSource() == view.btnDelete) {
-			cliente.setId(Integer.parseInt(view.textId.getText()));
+		if (e.getSource() == vista.botonEliminar) {
+			cliente.setId(Integer.parseInt(vista.textId.getText()));
 
 			if (consultas.eliminar(cliente)) {
 				JOptionPane.showMessageDialog(null, "El registro se ha eliminado ");
-				limpiar();
+				vaciarCampos();
 			} else {
 				JOptionPane.showMessageDialog(null, "No se ha podido eliminar. ");
-				limpiar();
+				vaciarCampos();
 			}
 		}
-		if (e.getSource() == view.btnBuscar) {
-			cliente.setNombre(view.textNombre.getText());
+		if (e.getSource() == vista.btnBuscar) {
+			cliente.setDni(Integer.parseInt(vista.textDni.getText()));
 			if (consultas.buscar(cliente)) {
-				view.textId.setText(String.valueOf(cliente.getId()));
-				view.textNombre.setText(cliente.getNombre());
-				view.textApellido.setText(cliente.getApellido());
-				view.textAdress.setText(cliente.getDireccion());
-				view.textDni.setText(String.valueOf(cliente.getDni()));
-				view.textDate.setText(cliente.getFecha());
-				view.textId.setVisible(true);
+				vista.textId.setText(String.valueOf(cliente.getId()));
+				vista.textNombre.setText(cliente.getNombre());
+				vista.textApellido.setText(cliente.getApellido());
+				vista.textAdress.setText(cliente.getDireccion());
+				vista.textDni.setText(String.valueOf(cliente.getDni()));
+				vista.textDate.setText(cliente.getFecha());
+				vista.textId.setVisible(true);
 
 			} else {
-				JOptionPane.showMessageDialog(null, "No hay ningun registro");
-				limpiar();
+				JOptionPane.showMessageDialog(null, "No se han encontrado clientes con este dni.");
+				vaciarCampos();
 			}
 		}
-		if (e.getSource() == view.btnClean) {
-			limpiar();
+		if (e.getSource() == vista.botonVaciar) {
+			vaciarCampos();
 		}
 	}
 
-	public void limpiar() {
-		view.textId.setText(null);
-		view.textNombre.setText(null);
-		view.textApellido.setText(null);
-		view.textAdress.setText(null);
-		view.textDni.setText(null);
-		view.textDate.setText(null);
+	
+	public void vaciarCampos() {
+		vista.textId.setText(null);
+		vista.textNombre.setText(null);
+		vista.textApellido.setText(null);
+		vista.textAdress.setText(null);
+		vista.textDni.setText(null);
+		vista.textDate.setText(null);
 	}
 
 }

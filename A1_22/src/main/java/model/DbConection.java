@@ -44,7 +44,7 @@ public class DbConection {
 		return con;
 	}
 
-	public void desconectar() {
+	public void desconexion() {
 		try {
 			if (con != null) {
 				con.close();

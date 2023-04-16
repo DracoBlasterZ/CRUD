@@ -26,13 +26,14 @@ public class ClienteView extends JFrame {
 	public JLabel lblApellido;
 	public JLabel lblNombre;
 	public JButton btnBuscar;
-	public JButton btnAdd;
-	public JButton btnUpdate;
-	public JButton btnDelete;
-	public JButton btnClean;
+	public JButton botonAñadir;
+	public JButton botonModificar;
+	public JButton botonEliminar;
+	public JButton botonVaciar;
 	public JTextField textDate;
 	public JLabel lblDate;
 	public JTextField textId;
+	private JLabel lblId;
 
 	public ClienteView() {
 
@@ -46,62 +47,62 @@ public class ClienteView extends JFrame {
 
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombre.setBounds(38, 39, 70, 21);
+		lblNombre.setBounds(38, 99, 70, 21);
 		contentPane.add(lblNombre);
 
 		lblApellido = new JLabel("Apellido");
 		lblApellido.setHorizontalAlignment(SwingConstants.CENTER);
-		lblApellido.setBounds(38, 81, 70, 21);
+		lblApellido.setBounds(38, 132, 70, 21);
 		contentPane.add(lblApellido);
 
 		lblDireccin = new JLabel("Dirección");
 		lblDireccin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDireccin.setBounds(38, 124, 70, 21);
+		lblDireccin.setBounds(38, 165, 70, 21);
 		contentPane.add(lblDireccin);
 
 		lblDni = new JLabel("DNI");
 		lblDni.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDni.setBounds(38, 163, 70, 21);
+		lblDni.setBounds(38, 66, 70, 21);
 		contentPane.add(lblDni);
 
 		textNombre = new JTextField();
-		textNombre.setBounds(154, 40, 192, 21);
+		textNombre.setBounds(154, 98, 192, 21);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
 
 		textApellido = new JTextField();
 		textApellido.setColumns(10);
-		textApellido.setBounds(154, 82, 192, 21);
+		textApellido.setBounds(154, 131, 192, 21);
 		contentPane.add(textApellido);
 
 		textAdress = new JTextField();
 		textAdress.setColumns(10);
-		textAdress.setBounds(154, 125, 192, 21);
+		textAdress.setBounds(154, 164, 192, 21);
 		contentPane.add(textAdress);
 
 		textDni = new JTextField();
 		textDni.setColumns(10);
-		textDni.setBounds(154, 164, 192, 21);
+		textDni.setBounds(154, 65, 192, 21);
 		contentPane.add(textDni);
 
-		btnAdd = new JButton("Añadir");
-		btnAdd.setBounds(24, 251, 89, 23);
-		contentPane.add(btnAdd);
+		botonAñadir = new JButton("Añadir");
+		botonAñadir.setBounds(24, 251, 89, 23);
+		contentPane.add(botonAñadir);
 
-		btnUpdate = new JButton("Modificar");
-		btnUpdate.setBounds(144, 251, 89, 23);
-		contentPane.add(btnUpdate);
+		botonModificar = new JButton("Modificar");
+		botonModificar.setBounds(144, 251, 89, 23);
+		contentPane.add(botonModificar);
 
-		btnDelete = new JButton("Eliminar");
-		btnDelete.setBounds(263, 251, 89, 23);
-		contentPane.add(btnDelete);
+		botonEliminar = new JButton("Eliminar");
+		botonEliminar.setBounds(263, 251, 89, 23);
+		contentPane.add(botonEliminar);
 
-		btnClean = new JButton("Limpiar");
-		btnClean.setBounds(390, 251, 89, 23);
-		contentPane.add(btnClean);
+		botonVaciar = new JButton("Limpiar");
+		botonVaciar.setBounds(390, 251, 89, 23);
+		contentPane.add(botonVaciar);
 
-		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(390, 39, 89, 23);
+		btnBuscar = new JButton("Buscar por DNI");
+		btnBuscar.setBounds(176, 25, 155, 23);
 		contentPane.add(btnBuscar);
 
 		lblDate = new JLabel("Fecha");
@@ -115,8 +116,12 @@ public class ClienteView extends JFrame {
 		contentPane.add(textDate);
 
 		textId = new JTextField();
-		textId.setBounds(393, 96, 86, 20);
+		textId.setBounds(400, 66, 86, 20);
 		contentPane.add(textId);
+		
+		lblId = new JLabel("Id");
+		lblId.setHorizontalAlignment(SwingConstants.CENTER);
+		lblId.setBounds(347, 66, 51, 21);
+		contentPane.add(lblId);
 	}
-
 }
