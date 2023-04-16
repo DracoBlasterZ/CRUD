@@ -118,7 +118,7 @@ public class VideosConnector extends AbstractTableModel {
 
 			// Execute statement and close if success
 			pStatement.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Usuario añadido", "Completado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Video añadido", "Completado", JOptionPane.INFORMATION_MESSAGE);
 			pStatement.close();
 			connection.close();
 			updateTable();
@@ -126,7 +126,7 @@ public class VideosConnector extends AbstractTableModel {
 			e.printStackTrace();
 		}
 	}
-	public void deleteCliente(int index) {
+	public void deleteVideo(int index) {
 		Videos video = videos.get(index);
 		int videoID = video.getId();
 		connection = DBConnectorClass.connect("192.168.1.128:3306","remote","por.java12DABA");
@@ -137,7 +137,7 @@ public class VideosConnector extends AbstractTableModel {
 			Statement statement = connection.createStatement();
 
 			statement.executeUpdate(query);
-			JOptionPane.showMessageDialog(null, "Usuario eliminado", "Completado!",
+			JOptionPane.showMessageDialog(null, "Video eliminado", "Completado!",
 					JOptionPane.INFORMATION_MESSAGE);
 
 			statement.close();
@@ -148,6 +148,31 @@ public class VideosConnector extends AbstractTableModel {
 
 		// Remove from table
 		videos.remove(index);
+	}
+	public void updateVideo(Videos video) {
+		// Make connection, use DB and create query
+		connection = DBConnectorClass.connect("192.168.1.128:3306","remote","por.java12DABA");
+		DBConnectorClass.selectDB("Youtube");
+		String query = "UPDATE " + table + " SET title=?, director=?, cli_id=? WHERE id=?;";
+		try {
+			// Make statement to update cliente with fields
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			pStatement.setString(1, video.getTitle());
+			pStatement.setString(2, video.getDirector());
+			pStatement.setInt(3, video.getCli_id());
+			pStatement.setInt(4, video.getId());
+
+			// Execute statement and close if success
+			pStatement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Video modificado", "Completado!",
+					JOptionPane.INFORMATION_MESSAGE);
+			pStatement.close();
+			connection.close();
+			updateTable();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 	

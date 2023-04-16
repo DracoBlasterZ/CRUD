@@ -159,4 +159,32 @@ public class ClientesConnector extends AbstractTableModel {
 		// Remove from table
 		clientes.remove(index);
 	}
+	public void updateCliente(Clientes cliente) {
+		// Make connection, use DB and create query
+		connection = DBConnectorClass.connect("192.168.1.128:3306","remote","por.java12DABA");
+		DBConnectorClass.selectDB("Youtube");
+		String query = "UPDATE " + table + " SET nombre=?, apellido=?, direccion=?, dni=?, fecha=? WHERE id=?;";
+		try {
+			// Make statement to update cliente with fields
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			pStatement.setString(1, cliente.getNombre());
+			pStatement.setString(2, cliente.getApellido());
+			pStatement.setString(3, cliente.getDireccion());
+			pStatement.setInt(4, cliente.getDNI());
+			pStatement.setString(5, cliente.getDate());
+			pStatement.setInt(6, cliente.getId());
+
+			// Execute statement and close if success
+			pStatement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Usuario editado", "Completado!",
+					JOptionPane.INFORMATION_MESSAGE);
+			pStatement.close();
+			connection.close();
+			updateTable();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
