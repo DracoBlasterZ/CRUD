@@ -1,4 +1,4 @@
-package UD22.A1_22;
+package A2_22_2;
 
 import static org.junit.Assert.assertTrue;
 
